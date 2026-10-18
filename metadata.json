@@ -1,0 +1,8 @@
+{
+  "name": "THE SKULLS",
+  "description": "تطبيق مراجعات وأخبار الألعاب THE SKULLS - تقييمات تفصيلية، مراجعات مجتمع اللاعبين، وأحدث أخبار منصات الألعاب.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile for THE SKULLS platform.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The authenticated user UID."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the gamer."
+        },
+        "email": {
+          "type": "string",
+          "description": "Google email address."
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "User avatar URL."
+        },
+        "gamerTag": {
+          "type": "string",
+          "description": "Custom gamer tag or nickname."
+        },
+        "favoritePlatform": {
+          "type": "string",
+          "description": "Primary gaming platform (PS5, XSX, PC, Switch)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation server timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update server timestamp."
+        }
+      },
+      "required": ["userId", "displayName"]
+    },
+    "ReviewLike": {
+      "title": "ReviewLike",
+      "description": "Like record indicating a user liked a game review.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The user UID who liked the review."
+        },
+        "reviewId": {
+          "type": "string",
+          "description": "Target game review ID."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when like occurred."
+        }
+      },
+      "required": ["userId", "reviewId"]
+    },
+    "ReviewComment": {
+      "title": "ReviewComment",
+      "description": "User comment and rating left on a game review.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Comment unique ID."
+        },
+        "reviewId": {
+          "type": "string",
+          "description": "Associated game review ID."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Author UID."
+        },
+        "userName": {
+          "type": "string",
+          "description": "Author name."
+        },
+        "userPhoto": {
+          "type": "string",
+          "description": "Author avatar URL."
+        },
+        "gamerTag": {
+          "type": "string",
+          "description": "Author gamer tag."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Comment text body."
+        },
+        "rating": {
+          "type": "number",
+          "description": "User game rating (1.0 to 10.0)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Update timestamp."
+        }
+      },
+      "required": ["reviewId", "userId", "userName", "comment"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User profiles indexed by UID."
+    },
+    "/reviews/{reviewId}/likes/{userId}": {
+      "schema": {
+        "$ref": "#/entities/ReviewLike"
+      },
+      "description": "Review likes per game review by user UID."
+    },
+    "/reviews/{reviewId}/comments/{commentId}": {
+      "schema": {
+        "$ref": "#/entities/ReviewComment"
+      },
+      "description": "Public community comments on a game review."
+    }
+  }
+}
